@@ -9,5 +9,13 @@ public class Event {
 		this.name = name;
 		this.buddies = new Buddies(maxMovements, maxBuddies);
 	}
+	
+	public void add(String buddyName) {
+		this.buddies.add(buddyName);
+	}
+	
+	public void remove(String buddyName) {
+		this.buddies.remove(buddyName);
+	}
 
 }
