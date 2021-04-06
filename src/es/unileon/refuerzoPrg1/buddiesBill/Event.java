@@ -10,11 +10,11 @@ public class Event {
 		this.buddies = new Buddies(maxMovements, maxBuddies);
 	}
 	
-	public void add(String buddyName) {
+	public void add(String buddyName) throws BuddiesBillException {
 		this.buddies.add(buddyName);
 	}
 	
-	public void remove(String buddyName) {
+	public void remove(String buddyName) throws BuddiesBillException {
 		this.buddies.remove(buddyName);
 	}
 

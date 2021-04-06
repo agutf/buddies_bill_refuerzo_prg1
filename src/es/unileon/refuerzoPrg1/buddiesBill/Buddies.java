@@ -12,12 +12,12 @@ public class Buddies {
 		this.buddies = new Buddy[maxBuddies];
 	}
 	
-	public void add(String buddyName) {
+	public void add(String buddyName) throws BuddiesBillException {
 		if(this.exists(buddyName)) {
 			throw new BuddiesBillException("El buddy " + buddyName + " ya existe");
 		}
 		else if(this.next == this.buddies.length) {
-			throw new BuddiesBillExpception("No se puede anyadir al buddy " + buddyName ". Lista de buddies llena");
+			throw new BuddiesBillException("No se puede anyadir al buddy " + buddyName + ". Lista de buddies llena");
 		}
 		else {
 			this.buddies[this.next] = new Buddy(buddyName, this.MAX_MOVEMENTS);
@@ -27,18 +27,19 @@ public class Buddies {
 	
 	// TO-DO: Metodo reorder para llevar los null al final
 	
-	// TO-DO: Codigo duplicado
+	// DONE: Codigo duplicado
 	
-	public void remove(String buddyName) {
-		int position = 0;
+	// TO-DO: Hacer el toString()
+	
+	public void remove(String buddyName) throws BuddiesBillException {
+		int buddyPosition = this.search(buddyName);
 		
-		while(!this.buddies[position].equals(buddyName) && position < this.next) {
-			position++;
+		if(buddyPosition == -1) {
+			throw new BuddiesBillException("No se puede borrar a " + buddyName + " porque no existe");
 		}
-		
-		if(position != this.next) {
-			this.buddies[position] = null;
-			this.reorder();
+		else {
+			this.buddies[buddyPosition] = null;
+			//this.reorder();
 			this.next--;
 		}
 	}
@@ -46,18 +47,22 @@ public class Buddies {
 	// TO-DO: Metodo equals de la clase Buddy para usarlo en este metodo
 	
 	private boolean exists(String buddyName) {
+		return this.search(buddyName) != -1;
+	}
+	
+	private int search(String buddyName) {
 		int position = 0;
-		boolean exists = false;
 		
-		while(!this.buddies[position].equals(buddyName) && position < this.next) {
+		while(position < this.next && !this.buddies[position].equals(buddyName)) {
 			position++;
 		}
 		
-		if(position != this.next) {
-			exists = true;
+		if(position == this.next) {
+			position = -1;
 		}
 		
-		return exists;
+		return position;
+		
 	}
 
 }
