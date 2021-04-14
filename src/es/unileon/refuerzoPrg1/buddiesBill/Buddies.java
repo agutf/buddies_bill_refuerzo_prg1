@@ -64,5 +64,19 @@ public class Buddies {
 		return position;
 		
 	}
+	
+	public String toString() {
+		StringBuilder output = new StringBuilder();
+		
+		for(int i=0; i<this.next; i++) {
+			output.append(this.buddies[i].toString() + "\n");
+		}
+		
+		if(output.toString().length() == 0) {
+			output.append("No hay buddies");
+		}
+		
+		return output.toString();
+	}
 
 }

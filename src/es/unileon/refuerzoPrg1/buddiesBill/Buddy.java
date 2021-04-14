@@ -9,5 +9,13 @@ public class Buddy {
 		this.name = name;
 		this.movements = new Movements(maxMovements);
 	}
+	
+	public boolean equals(String buddyName) {
+		return this.name == buddyName;
+	}
+	
+	public String toString() {
+		return this.name + "\n" + this.movements.toString();
+	}
 
 }

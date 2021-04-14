@@ -21,7 +21,7 @@ public class BuddiesTest {
 	@Test
 	public void testRemoveOk() throws BuddiesBillException{
 		this.buddies.add(this.sergio);
-		assertEquals("Sergio\n[\n]", this.buddies.toString());
+		assertEquals("Sergio\n[]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.sergio);
 		assertEquals("No hay buddies", this.buddies.toString());
@@ -32,10 +32,10 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.add(this.gladis);
-		assertEquals("Sergio, Oliver, Gladis", this.buddies.toString());
+		assertEquals("Sergio\n[]\nOliver\n[]\nGladis\n[]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.sergio);
-		assertEquals("Oliver, Gladis", this.buddies.toString());
+		assertEquals("Oliver\n[]\nGladis\n[]\n", this.buddies.toString());
 	}
 	
 	@Test
@@ -43,10 +43,10 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.add(this.gladis);
-		assertEquals("Sergio, Oliver, Gladis", this.buddies.toString());
+		assertEquals("Sergio\n[]\nOliver\n[]\nGladis\n[]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.gladis);
-		assertEquals("Sergio, Oliver", this.buddies.toString());
+		assertEquals("Sergio\n[]\nOliver\n[]\n", this.buddies.toString());
 	}
 	
 	@Test
@@ -54,10 +54,10 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.add(this.gladis);
-		assertEquals("Sergio, Oliver, Gladis", this.buddies.toString());
+		assertEquals("Sergio\n[]\nOliver\n[]\nGladis\n[]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.oliver);
-		assertEquals("Sergio, Gladis", this.buddies.toString());
+		assertEquals("Sergio\n[]\nGladis\n[]\n", this.buddies.toString());
 	}
 	
 	@Test(expected = BuddiesBillException.class)
@@ -70,6 +70,15 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.remove(this.gladis);
+	}
+	
+	@Test
+	public void testToString() throws BuddiesBillException {
+		this.buddies.add(this.sergio);
+		this.buddies.add(this.gladis);
+		this.buddies.add(this.oliver);
+		
+		assertEquals("Sergio\n[]\nGladis\n[]\nOliver\n[]\n", this.buddies.toString());
 	}
 
 }

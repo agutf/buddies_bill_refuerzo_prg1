@@ -9,5 +9,9 @@ public class Movements {
 		this.movements = new Movement[maxMovements];
 		this.next = 0;
 	}
+	
+	public String toString() {
+		return "[]";
+	}
 
 }
