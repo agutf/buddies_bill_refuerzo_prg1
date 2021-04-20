@@ -39,7 +39,7 @@ public class Buddies {
 		}
 		else {
 			this.buddies[buddyPosition] = null;
-			//this.reorder();
+			this.reorder(buddyPosition);
 			this.next--;
 		}
 	}
@@ -63,6 +63,18 @@ public class Buddies {
 		
 		return position;
 		
+	}
+	
+	private void reorder(int from) {
+		for(int i=from; i<this.next - 1; i++) {
+			this.swap(i, i+1);
+		}
+	}
+	
+	private void swap(int i, int j) {
+		Buddy aux = this.buddies[i];
+		this.buddies[i] = this.buddies[j];
+		this.buddies[j] = aux;
 	}
 	
 	public String toString() {

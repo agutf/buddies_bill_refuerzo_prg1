@@ -19,6 +19,35 @@ public class BuddiesTest {
 	}
 	
 	@Test
+	public void testAddEmpty() throws BuddiesBillException {
+		assertEquals("No hay buddies", this.buddies.toString());
+		this.buddies.add(this.sergio);
+		assertEquals("Sergio\n[]\n", this.buddies.toString());
+	}
+	
+	@Test(expected = BuddiesBillException.class)
+	public void testAddFull() throws BuddiesBillException {
+		this.buddies.add(this.sergio);
+		this.buddies.add(this.gladis);
+		this.buddies.add(this.oliver);
+		this.buddies.add("Miranda");
+	}
+	
+	@Test
+	public void testAddUntilFull() throws BuddiesBillException {
+		this.buddies.add(this.sergio);
+		this.buddies.add(this.gladis);
+		this.buddies.add(this.oliver);
+		assertEquals("Sergio\n[]\nGladis\n[]\nOliver\n[]\n", this.buddies.toString());
+	}
+	
+	@Test(expected = BuddiesBillException.class)
+	public void testAddRepeated() throws BuddiesBillException {
+		this.buddies.add(this.oliver);
+		this.buddies.add(this.oliver);
+	}
+	
+	@Test
 	public void testRemoveOk() throws BuddiesBillException{
 		this.buddies.add(this.sergio);
 		assertEquals("Sergio\n[]\n", this.buddies.toString());
