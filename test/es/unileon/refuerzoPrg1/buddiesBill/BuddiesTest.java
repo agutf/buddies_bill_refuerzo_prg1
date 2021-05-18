@@ -22,7 +22,7 @@ public class BuddiesTest {
 	public void testAddEmpty() throws BuddiesBillException {
 		assertEquals("No hay buddies", this.buddies.toString());
 		this.buddies.add(this.sergio);
-		assertEquals("Sergio\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\n", this.buddies.toString());
 	}
 	
 	@Test(expected = BuddiesBillException.class)
@@ -38,7 +38,7 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.gladis);
 		this.buddies.add(this.oliver);
-		assertEquals("Sergio\n[]\nGladis\n[]\nOliver\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nGladis\n[\n]\nOliver\n[\n]\n", this.buddies.toString());
 	}
 	
 	@Test(expected = BuddiesBillException.class)
@@ -50,7 +50,7 @@ public class BuddiesTest {
 	@Test
 	public void testRemoveOk() throws BuddiesBillException{
 		this.buddies.add(this.sergio);
-		assertEquals("Sergio\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.sergio);
 		assertEquals("No hay buddies", this.buddies.toString());
@@ -61,10 +61,10 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.add(this.gladis);
-		assertEquals("Sergio\n[]\nOliver\n[]\nGladis\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nOliver\n[\n]\nGladis\n[\n]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.sergio);
-		assertEquals("Oliver\n[]\nGladis\n[]\n", this.buddies.toString());
+		assertEquals("Oliver\n[\n]\nGladis\n[\n]\n", this.buddies.toString());
 	}
 	
 	@Test
@@ -72,10 +72,10 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.add(this.gladis);
-		assertEquals("Sergio\n[]\nOliver\n[]\nGladis\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nOliver\n[\n]\nGladis\n[\n]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.gladis);
-		assertEquals("Sergio\n[]\nOliver\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nOliver\n[\n]\n", this.buddies.toString());
 	}
 	
 	@Test
@@ -83,10 +83,10 @@ public class BuddiesTest {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.oliver);
 		this.buddies.add(this.gladis);
-		assertEquals("Sergio\n[]\nOliver\n[]\nGladis\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nOliver\n[\n]\nGladis\n[\n]\n", this.buddies.toString());
 		
 		this.buddies.remove(this.oliver);
-		assertEquals("Sergio\n[]\nGladis\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nGladis\n[\n]\n", this.buddies.toString());
 	}
 	
 	@Test(expected = BuddiesBillException.class)
@@ -102,12 +102,37 @@ public class BuddiesTest {
 	}
 	
 	@Test
+	public void testAddMovementOk() throws BuddiesBillException {
+		this.buddies.add(this.sergio);
+		this.buddies.add(this.oliver);
+		
+		Movement gasolina = new Movement(100, "Gasolina");
+		Movement hotel = new Movement(500, "Hotel");
+		
+		this.buddies.add(gasolina, this.sergio);
+		this.buddies.add(hotel, this.oliver);
+		
+		assertEquals("Sergio\n[\nGasolina 100.0\n]\nOliver\n[\nHotel 500.0\n]\n", this.buddies.toString());
+	}
+	
+	@Test(expected = BuddiesBillException.class)
+	public void testAddMovementRepeated() throws BuddiesBillException {
+		this.buddies.add(this.sergio);
+		this.buddies.add(this.oliver);
+		
+		Movement gasolina = new Movement(100, "Gasolina");
+		
+		this.buddies.add(gasolina, this.sergio);
+		this.buddies.add(gasolina, this.oliver);
+	}
+	
+	@Test
 	public void testToString() throws BuddiesBillException {
 		this.buddies.add(this.sergio);
 		this.buddies.add(this.gladis);
 		this.buddies.add(this.oliver);
 		
-		assertEquals("Sergio\n[]\nGladis\n[]\nOliver\n[]\n", this.buddies.toString());
+		assertEquals("Sergio\n[\n]\nGladis\n[\n]\nOliver\n[\n]\n", this.buddies.toString());
 	}
 
 }

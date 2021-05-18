@@ -17,5 +17,14 @@ public class Event {
 	public void remove(String buddyName) throws BuddiesBillException {
 		this.buddies.remove(buddyName);
 	}
+	
+	public void add(Movement movement, String buddyName) throws BuddiesBillException {
+		this.buddies.add(movement, buddyName);
+	}
+	
+	
+	public void removeMovement(String movementName) throws BuddiesBillException {
+		this.buddies.removeMovement(movementName);
+	}
 
 }

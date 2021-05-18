@@ -9,5 +9,16 @@ public class Movement {
 		this.amount = amount;
 		this.concept = concept;
 	}
-
+	
+	public String getConcept() {
+		return this.concept;
+	}
+	
+	public boolean equals(String movementName) {
+		return this.concept.equals(movementName);
+	}
+	
+	public String toString() {
+		return this.concept + " " + this.amount;
+	}
 }

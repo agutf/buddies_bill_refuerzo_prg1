@@ -44,6 +44,49 @@ public class Buddies {
 		}
 	}
 	
+	public void add(Movement movement, String buddyName) throws BuddiesBillException {
+		int buddyPosition = this.search(buddyName);
+		
+		if(buddyPosition == -1) {
+			throw new BuddiesBillException("No se puede anyadir un movimiento a un buddy que no existe");
+		}
+		else if(this.exists(movement)) {
+			throw new BuddiesBillException("El movimiento ya lo ha hecho otro buddy.");
+		}
+		else {
+			this.buddies[buddyPosition].add(movement);
+		}
+	}
+	
+	public void removeMovement(String movementName) throws BuddiesBillException {
+		int position = 0;
+		boolean found = false;
+		
+		while(!found && position < this.next) {
+			found = this.buddies[position].exists(movementName);
+			position++;
+		}
+		
+		if(found) {
+			this.buddies[position].removeMovement(movementName);
+		}
+		else {
+			throw new BuddiesBillException("No se ha encontrado el movimiento");
+		}
+	}
+	
+	private boolean exists(Movement movement) {
+		boolean found = false;
+		int position = 0;
+		
+		while(position < this.next && !found) {
+			found = this.buddies[position].exists(movement.getConcept());
+			position++;
+		}
+		
+		return found;
+	}
+	
 	// TO-DO: Metodo equals de la clase Buddy para usarlo en este metodo
 	
 	private boolean exists(String buddyName) {
