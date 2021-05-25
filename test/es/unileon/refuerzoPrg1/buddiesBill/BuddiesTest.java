@@ -125,7 +125,34 @@ public class BuddiesTest {
 		this.buddies.add(gasolina, this.sergio);
 		this.buddies.add(gasolina, this.oliver);
 	}
+
+	@Test(expected = BuddiesBillException.class)
+	public void testAddMovementNoBuddy() throws BuddiesBillException {
+		Movement gasolina = new Movement(100, "Gasolina");
+		this.buddies.add(gasolina, this.sergio);
+	}
+
+	@Test
+	public void testRemoveMovementOK() throws BuddiesBillException {
+		this.buddies.add("Sergio");
+		Movement hotel = new Movement(500, "Hotel");
+		this.buddies.add(hotel,"Sergio");
+		assertEquals("Sergio\n"
+				+ "[\n"
+				+ "Hotel 500.0\n"
+				+ "]\n", this.buddies.toString());
+		this.buddies.removeMovement("Hotel");
+		assertEquals("Sergio\n"
+				+ "[\n"
+				+ "]\n", this.buddies.toString());
+	}
 	
+	
+	@Test(expected = BuddiesBillException.class)
+	public void testRemoveMovement() throws BuddiesBillException {
+		this.buddies.removeMovement("Hotel");
+	}
+
 	@Test
 	public void testToString() throws BuddiesBillException {
 		this.buddies.add(this.sergio);

@@ -27,4 +27,8 @@ public class Event {
 		this.buddies.removeMovement(movementName);
 	}
 
+	public void settleUp() {
+		this.buddies.settleUp();
+	}
+
 }

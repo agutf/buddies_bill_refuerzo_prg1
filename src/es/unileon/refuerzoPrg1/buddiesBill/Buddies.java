@@ -66,7 +66,8 @@ public class Buddies {
 			found = this.buddies[position].exists(movementName);
 			position++;
 		}
-		
+		// explicacion de esto tan raro
+		position--;
 		if(found) {
 			this.buddies[position].removeMovement(movementName);
 		}
@@ -132,6 +133,10 @@ public class Buddies {
 		}
 		
 		return output.toString();
+	}
+
+	public void settleUp() {
+		
 	}
 
 }

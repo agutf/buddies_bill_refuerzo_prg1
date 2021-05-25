@@ -12,10 +12,10 @@ public class TextUI {
 		int option = 0;
 		
 		while(option != 9) {
-			this.showSummary();
-			this.showOptions();
+//			this.showSummary();
+//			this.showOptions();
 			option = this.selectOption();
-			this.executeOption(option);
+//			this.executeOption(option);
 		}
 	}
 	
@@ -46,15 +46,19 @@ public class TextUI {
 				break;
 			case 4: this.removeMovement();
 				break;
-			case 5: this.showSummary();
+			case 5: //this.showSummary();
 				break;
 			case 6: this.settleUp();
 				break;
-			case 7: this.exit();
+			case 7: //this.exit();
 				break;
 		}
 	}
 	
+	private void settleUp() {
+		this.event.settleUp();
+	}
+
 	private void addBuddy() {
 		System.out.println("Introduce el nombre del buddy a anyadir");
 		String buddyName = Keyboard.readString();
@@ -106,7 +110,7 @@ public class TextUI {
 	
 	public void removeMovement() {
 		String movementName = Keyboard.readString();
-		this.event.remove(movementName);
+		//this.event.remove(movementName);
 	}
 	
 }
